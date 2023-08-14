@@ -11,8 +11,8 @@ function AboutScreen() {
             
             <div>
               
-                Hi, I'm SonubabuT
-              </a>
+                <p>Hi, I'm SonubabuT</p>
+            
               <h1>Invoice for GBK</h1>
             </div>
           </div>
