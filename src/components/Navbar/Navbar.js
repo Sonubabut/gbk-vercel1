@@ -75,7 +75,7 @@ function Navbar() {
               damping: 20,
             }}
           >
-            Invoice Maker
+            GBK Flowers
             <InvoiceNavbarLoading
               loop
               className="nav-loading-right "
