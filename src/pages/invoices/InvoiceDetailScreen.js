@@ -1393,7 +1393,7 @@ function InvoiceDetailScreen(props) {
                     onClick={() => saveAs("Unpaid")}
                   >
                     <DollarIcon className="h-5 w-5 mr-1" />{" "}
-                    {params.id === "new" ? "Save" : "Update"} As Unpaid
+                    {params.id === "new" ? "Save" : "Update"}  As Unpaid
                   </Button>
                 </div>
               )}
