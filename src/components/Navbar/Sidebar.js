@@ -83,7 +83,7 @@ function Sidebar() {
             <span className="nav-loading">
               <InvoiceNavbarLoading loop />
             </span>
-            Invoice Maker
+            GBK Flowers
           </motion.span>
         </div>
 
