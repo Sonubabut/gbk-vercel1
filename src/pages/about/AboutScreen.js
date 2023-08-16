@@ -15,7 +15,7 @@ function AboutScreen() {
             />
             <div>
               
-              <h1> Hi I am SonuBabuT </h1>
+              <h1> Hi, This is GBK Flower's</h1>
             </div>
           </div>
 
@@ -41,21 +41,21 @@ function AboutScreen() {
             </div>
           </div>
 
-          <PageTitle title="Build By" />
+          <PageTitle title="GBK Owened by" />
           <div className="mt-2 mb-5 pl-4 text-sm">
-            <h1>SonuBabuT</h1>
+            <h1>Basker</h1>
           </div>
 
           <PageTitle title="Contact" />
           <div className="mt-2 pl-1 text-sm">
             <a
-              href="tel:+917339290039"
+              href="tel:+91 9344633146"
               className="underline cursor-pointer"
               target={"_blank"}
               rel="noreferrer"
             >
               {" "}
-              +917339290039
+              +91 9344633146
             </a>
           </div>
         </div>
