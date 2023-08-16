@@ -19,7 +19,7 @@ function AboutScreen() {
             </div>
           </div>
 
-          <PageTitle title="Invoice Maker" />
+          <PageTitle title="Flower Shop in Vellore!" />
           <div className="mt-2 pl-4 text-sm">
             
           </div>
@@ -31,13 +31,13 @@ function AboutScreen() {
                 href="mailto:gbkflowers@gmail.com"
                 className="underline cursor-pointer"
               >
-                tsonubabu0@gmail.com
+                gbkflowers@gmail.com
               </a>{" "}
               (or){" "}
               
             </div>
             <div>
-              <span>🎁 </span>
+              <span>🎁 +91 9344633146</span>
             </div>
           </div>
 
