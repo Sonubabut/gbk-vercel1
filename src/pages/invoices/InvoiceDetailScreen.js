@@ -890,6 +890,17 @@ function InvoiceDetailScreen(props) {
               }
               style={{ backgroundColor: invoiceForm.color }}
             >
+
+              <div className={
+                  "font-title " +
+                  (isExporting
+                    ? " text-sm w-1/4 text-right pr-10"
+                    : " w-full sm:w-1/4 text-right sm:pr-10")
+                }
+              >
+                Date
+              </div>
+                  
               <div
                 className={
                   "font-title " +
@@ -942,6 +953,42 @@ function InvoiceDetailScreen(props) {
                   (index % 2 !== 0 ? " bg-gray-50 " : "")
                 }
               >
+
+                <div
+                  className={
+                    isExporting
+                      ? "font-title w-1/4 text-right pr-8 flex flex-row block"
+                      : "font-title w-full sm:w-1/4 text-right sm:pr-8 flex flex-row sm:block"
+                  }
+                >
+                  {!isExporting && (
+                    <span className="sm:hidden w-1/2 flex flex-row items-center">
+                      Date
+                    </span>
+                  )}
+                  <span
+                    className={
+                      isExporting
+                        ? "inline-block w-full mb-0"
+                        : "inline-block w-1/2 sm:w-full mb-1 sm:mb-0"
+                    }
+                  >
+                    {!isViewMode ? (
+                      <input
+                        autoComplete="nope"
+                        value={product.date}
+                        placeholder="Date"
+                        className={defaultInputSmStyle + " text-right"}
+                        onChange={(e) =>
+                          handlerProductValue(e, "date", product.id)
+                        }
+                      />
+                    ) : (
+                      <span className="pr-3">{product.date}</span>
+                    )}
+                  </span>
+                </div>
+                    
                 <div
                   className={
                     isExporting
