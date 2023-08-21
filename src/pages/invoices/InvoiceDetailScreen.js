@@ -171,8 +171,8 @@ function InvoiceDetailScreen(props) {
       id: nanoid(),
       name: "",
       productID: "",
-      amount: 1,
-      quantity: 1,
+      amount: '',
+      quantity: '',
     };
 
     setInvoiceForm((prev) => {
@@ -221,19 +221,19 @@ function InvoiceDetailScreen(props) {
 
       // If Keyname Price or Quantity must be only number
       if (keyName === "quantity") {
-        if (!`${value}`.match(/^\d+$/)) {
+        if (!`${value}`.match()) {
           return;
         }
       }
 
       if (keyName === "amount") {
-        if (!`${value}`.match(/^[0-9]\d*(\.\d+)?$/)) {
+        if (!`${value}`.match()) {
           return;
         }
       }
 
       // Quantity Zero Case
-      if ((keyName === "quantity" || keyName === "amount") && value <= 0) {
+      if ((keyName === "" || keyName === "") && value <= -2000000) {
         return;
       }
 
@@ -372,52 +372,71 @@ function InvoiceDetailScreen(props) {
       : 0;
   }, [invoiceForm]);
 
-  const addPercentageTax = useCallback(() => {
-    const isSomeTaxes = invoiceForm.taxes.some(
-      (form) => form.type === "percentage"
-    );
+  // const addPercentageTax = useCallback(() => {
+  //   const isSomeTaxes = invoiceForm.taxes.some(
+  //     (form) => form.type === "percentage"
+  //   );
 
-    if (isSomeTaxes) {
-      toast.error("Already Have Percentage Taxes!", {
-        position: "bottom-center",
-        autoClose: 2000,
-      });
-      return;
-    }
+  //   if (isSomeTaxes) {
+  //     toast.error("Already Have Percentage Taxes!", {
+  //       position: "bottom-center",
+  //       autoClose: 2000,
+  //     });
+  //     return;
+  //   }
 
+  //   setInvoiceForm((prev) => {
+  //     const subTotalAmount = sumProductTotal(prev.products);
+  //     const amount = (10 / 100) * subTotalAmount;
+  //     const percentageTax = {
+  //       id: nanoid(),
+  //       title: "Tax %",
+  //       type: "percentage",
+  //       value: 10,
+  //       amount,
+  //     };
+  //     const updateTaxes = [percentageTax, ...prev.taxes];
+  //     const totalAmount = sumTotalAmount(
+  //       subTotalAmount,
+  //       sumTotalTaxes(updateTaxes)
+  //     );
+
+  //     return {
+  //       ...prev,
+  //       taxes: updateTaxes,
+  //       totalAmount: totalAmount,
+  //     };
+  //   });
+  // }, [invoiceForm]);
+
+  const subDiscountTax = useCallback(() => {
     setInvoiceForm((prev) => {
       const subTotalAmount = sumProductTotal(prev.products);
-      const amount = (10 / 100) * subTotalAmount;
-      const percentageTax = {
+      const emptyTax = {
         id: nanoid(),
-        title: "Tax %",
-        type: "percentage",
-        value: 10,
-        amount,
+        title: "Discount",
+        type: "",
+        value: '',
+        amount: '',
       };
-      const updateTaxes = [percentageTax, ...prev.taxes];
+      const updateTaxes = [...prev.taxes, emptyTax];
       const totalAmount = sumTotalAmount(
         subTotalAmount,
         sumTotalTaxes(updateTaxes)
       );
-
-      return {
-        ...prev,
-        taxes: updateTaxes,
-        totalAmount: totalAmount,
-      };
+      return { ...prev, taxes: updateTaxes, totalAmount };
     });
-  }, [invoiceForm]);
+  }, []);
 
   const addEmptyTax = useCallback(() => {
     setInvoiceForm((prev) => {
       const subTotalAmount = sumProductTotal(prev.products);
       const emptyTax = {
         id: nanoid(),
-        title: "Extra Fees",
-        type: "flat",
-        value: 1,
-        amount: 1,
+        title: "Luggage",
+        type: "",
+        value: '',
+        amount: '',
       };
       const updateTaxes = [...prev.taxes, emptyTax];
       const totalAmount = sumTotalAmount(
@@ -1295,16 +1314,24 @@ function InvoiceDetailScreen(props) {
             {/* Add Tax Action */}
             {!isViewMode && (
               <div className="flex flex-col sm:flex-row rounded-lg sm:visible w-full px-4 py-2 items-center sm:justify-end">
-                <div className="font-title w-full sm:w-1/4 text-right sm:pr-8 flex flex-row sm:block mb-1">
+                {/* <div className="font-title w-full sm:w-1/4 text-right sm:pr-8 flex flex-row sm:block mb-1">
                   <Button size="sm" block={1} onClick={addPercentageTax}>
                     <TaxesIcon style={IconStyle} className="h-5 w-5" />
                     Add Taxes (%)
                   </Button>
+                </div> */}
+                <div className="font-title w-full sm:w-1/4 text-right sm:pr-8 flex flex-row sm:block mb-1">
+                  <Button size="sm" block={1} onClick={subDiscountTax}>
+                    <TaxesIcon style={IconStyle} className="h-5 w-5" />
+                    Add Discount
+                  </Button>
                 </div>
+
+
                 <div className="font-title w-full sm:w-1/4 text-right sm:pr-8 flex flex-row sm:block mb-1">
                   <Button size="sm" block={1} onClick={addEmptyTax}>
                     <DollarIcon style={IconStyle} className="w-5 h-5" />
-                    Add Extra Fee
+                    Add Luggage Fees
                   </Button>
                 </div>
               </div>
@@ -1393,7 +1420,7 @@ function InvoiceDetailScreen(props) {
                     onClick={() => saveAs("Unpaid")}
                   >
                     <DollarIcon className="h-5 w-5 mr-1" />{" "}
-                    {params.id === "new" ? "Save" : "Update"}  As Unpaid
+                    {params.id === "new" ? "Save" : "Update"} As Unpaid
                   </Button>
                 </div>
               )}
